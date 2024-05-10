@@ -3,8 +3,17 @@ def main():
     book_content = get_book_text(book_path)
     word_count = get_num_words(book_content)
     letter_count = get_letter_count(book_content)
-    print(f"Book word count: {word_count}")
-    print(f"Book letter count: {letter_count}")
+
+    def print_report():
+        print(f"--- Begin report of {book_path} ---")
+        print(f"{word_count} words found in the document\n")
+        letter_string_template = "The '{}' character was found {} times."
+        for letter in letter_count:
+            letter_str = letter_string_template.format(letter, letter_count[letter])
+            print(letter_str)
+        print("--- End report ---")
+
+    print_report()
 
 
 def get_num_words(words: str) -> int:
