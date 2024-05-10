@@ -1,11 +1,14 @@
-def main():
-    book_path = "books/frankenstein.txt"
-    book_content = get_book_text(book_path)
+#!/usr/bin/env python3
+import argparse
+
+
+def main(file_path):
+    book_content = get_book_text(file_path)
     word_count = get_num_words(book_content)
     letter_count = get_letter_count(book_content)
 
     def print_report():
-        print(f"--- Begin report of {book_path} ---")
+        print(f"--- Begin report of {file_path} ---")
         print(f"{word_count} words found in the document\n")
         letter_string_template = "The '{}' character was found {} times."
         for letter in letter_count:
@@ -39,4 +42,9 @@ def get_letter_count(text: str) -> dict:
     return letters_count
 
 
-main()
+parser = argparse.ArgumentParser()
+parser.add_argument("path", help="Path to text file")
+args = parser.parse_args()
+
+
+main(args.path)
